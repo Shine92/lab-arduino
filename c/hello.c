@@ -180,6 +180,7 @@ int main(void) {
     scanf("%d",&rect_star_num);
     rect_star_mod=rect_star_num%2;
   }
+  
 
 
 
