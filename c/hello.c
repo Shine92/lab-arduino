@@ -123,17 +123,67 @@ int main(void) {
   //     float salary;
   // } Person;
   Person teacher;
-  scanf("%s",teacher.name);
-  scanf("%d", &teacher.age);
-  scanf("%f", &teacher.salary);
-  printf("%s is %d years old. %f\n", teacher.name, teacher.age, teacher.salary);
+  // scanf("%s",teacher.name);
+  // scanf("%d", &teacher.age);
+  // scanf("%f", &teacher.salary);
+  // printf("%s is %d years old. %f\n", teacher.name, teacher.age, teacher.salary);
 
   printf("\n<!-- defineCircle.c -->\n");
   // scanf("%d", &radius);
   // printf("%f, %f\n", DEFINE_PI * radius * radius, 2 * DEFINE_PI * radius );
 
   printf("\n<!-- defineTypedef.c -->\n");
-  printf("please see structTypedefInput.c\n", );
+  printf("please see structTypedefInput.c\n");
+
+  printf("\n<!-- triangle.c -->\n");
+  triangle1();
+  printf("\n");
+  triangle2();
+  printf("\n");
+  triangle3();
+  printf("\n");
+  triangle4();
+
+  printf("\n<!-- rectangle.c -->\n");
+  // int rectN,rectM,rectD;
+  // scanf("%d %d %d", &rectN, &rectM, &rectD );
+  // for (int i=1;i<=rectD;i++){
+  //   for (int j=1;j<=rectN;j++){
+  //     printf("%c", '*');
+  //   }
+  //   printf("\n");
+  // }
+  // for (int i=1;i<=rectM-rectD*2;i++){
+  //   for (int j=1;j<=rectD;j++){
+  //     printf("%c", '*');
+  //   }
+  //   for (int j=1;j<=rectN-rectD*2;j++){
+  //     printf("%c", ' ');
+  //   }
+  //   for (int j=1;j<=rectD;j++){
+  //     printf("%c", '*');
+  //   }
+  //   printf("\n");
+  // }
+  // for (int i=1;i<=rectD;i++){
+  //   for (int j=1;j<=rectN;j++){
+  //     printf("%c", '*');
+  //   }
+  //   printf("\n");
+  // }
+
+  printf("\n<!-- rectangle_star.c -->\n");
+  int rect_star_num=11;
+  int rect_star_mod=0;
+  while (rect_star_mod==0){
+    printf("input odd:");
+    scanf("%d",&rect_star_num);
+    rect_star_mod=rect_star_num%2;
+  }
+
+
+
+
 
 
 
