@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "structTypedef.c"
 #define MAX 100
 #define DEFINE_PI 3.1415926
@@ -122,7 +123,7 @@ int main(void) {
   //     int age;
   //     float salary;
   // } Person;
-  Person teacher;
+  // Person teacher;
   // scanf("%s",teacher.name);
   // scanf("%d", &teacher.age);
   // scanf("%f", &teacher.salary);
@@ -173,19 +174,52 @@ int main(void) {
   // }
 
   printf("\n<!-- rectangle_star.c -->\n");
-  int rect_star_num=11;
-  int rect_star_mod=0;
-  while (rect_star_mod==0){
-    printf("input odd:");
-    scanf("%d",&rect_star_num);
-    rect_star_mod=rect_star_num%2;
+  // int rect_star_num=21;
+  // int rect_star_mod=0;
+  // while (rect_star_mod==0){
+  //   printf("input odd:");
+  //   scanf("%d",&rect_star_num);
+  //   rect_star_mod=rect_star_num%2;
+  // }
+  // a=(rect_star_num+1)/2;//中線值等於對角線長度+1除以2
+	// for(int b=1;b<=a;b++)//畫出菱形上半部(含最中間那行)
+	// {
+	// 	for(int d=a-b;d>0;d--)//畫空白
+	// 	{
+	// 	printf(" ");
+	// 	}
+	// 	for(int e=1;e<=2*b-1;e++)//畫星號
+	// 	{
+	// 		printf("*");
+	// 	}
+	// 	printf("\n");//換行
+	// }
+	// for(int b=a-1;b>0;b--)
+	// {
+	// 	for(int d=a-b;d>0;d--)//畫空白
+	// 	{
+	// 		printf(" ");
+	// 	}
+	// 	for(int e=1;e<=2*b-1;e++)//畫星號
+	// 	{
+	// 		printf("*");
+	// 	}
+	// 	printf("\n");//換行
+	// }
+
+  printf("\n<!-- id.c -->\n");
+  int isOK = parse_str("11111115");
+  if (isOK) {
+    printf("%s\n", "OK");
+  } else {
+    printf("%s\n", "nOK");
   }
-  
-
-
-
-
-
+  isOK = parse_int(22222220);
+  if (isOK) {
+    printf("%s\n", "OK");
+  } else {
+    printf("%s\n", "nOK");
+  }
 
 
 }
