@@ -14,7 +14,7 @@
 #include <SPI.h>
 #include <string.h>
 #include "utility/debug.h"
-#include<stdlib.h>
+#include <stdlib.h>
 
 // Software serial
 SoftwareSerial cameraconnection = SoftwareSerial(2, 4);

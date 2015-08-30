@@ -68,6 +68,7 @@ void loop()
     }
 }
 /*********************************************************************/
+  // 將rx過來的資料清空
 void clearRxBuf()
 {
   while (CAM_SERIAL.available()) 
@@ -101,16 +102,23 @@ int readBytes(char *dest, int len, unsigned int timeout)
   return read_len;
 }
 /*********************************************************************/
+  // arduino给摄像机上电后,arduino连续发送同步请求(AA 0D 00 00 00 00),直到摄像机应 答(AA 0E 0D XX 00 00)。通常arduino发送 5 次以内,摄像机会成功应答。  
+  // 1.cmd  aa 0d 00 00 00 00 同步請求
+  // 2.resp aa 0e 0d xx 00 00 回應1
+  // 3.resp aa 0d 00 00 00 00 回應2
+  // 4.cmd  aa 0e 0d 00 00 00 同步確認
 void initialize()
-{   
-  char cmd[] = {0xaa,0x0d|cameraAddr,0x00,0x00,0x00,0x00} ;  
+{ 
+  char cmd[] = {0xaa,0x0d|cameraAddr,0x00,0x00,0x00,0x00} ;
   unsigned char resp[6];
 
   Serial.print("initializing camera...");
   
   while (1) 
   {
+    // 1.cmd
     sendCmd(cmd,6);
+    // 2.resp
     if (readBytes((char *)resp, 6,1000) != 6)
     {
       Serial.print(".");
@@ -118,16 +126,21 @@ void initialize()
     }
     if (resp[0] == 0xaa && resp[1] == (0x0e | cameraAddr) && resp[2] == 0x0d && resp[4] == 0 && resp[5] == 0) 
     {
+      // 3.resp
       if (readBytes((char *)resp, 6, 500) != 6) continue; 
       if (resp[0] == 0xaa && resp[1] == (0x0d | cameraAddr) && resp[2] == 0 && resp[3] == 0 && resp[4] == 0 && resp[5] == 0) break; 
     }
   }  
   cmd[1] = 0x0e | cameraAddr;
   cmd[2] = 0x0d;
+  // 4.cmd
   sendCmd(cmd, 6); 
   //Serial.println("\nCamera initialization done.");
 }
 /*********************************************************************/
+  // 拍照前初始化
+  // 1. cmd  aa 01 00 07 xx 07 JPEG預覽，VGA格式
+  // 2. resp aa 0e 01 xx 00 00 回應ok
 void preCapture()
 {
   char cmd[] = { 0xaa, 0x01 | cameraAddr, 0x00, 0x07, 0x00, PIC_FMT };  
@@ -136,11 +149,22 @@ void preCapture()
   while (1)
   {
     clearRxBuf();
+    // 1.
     sendCmd(cmd, 6);
+    // 2.
     if (readBytes((char *)resp, 6, 100) != 6) continue; 
     if (resp[0] == 0xaa && resp[1] == (0x0e | cameraAddr) && resp[2] == 0x01 && resp[4] == 0 && resp[5] == 0) break; 
   }
 }
+/*********************************************************************/
+  // 拍照
+  // 1.1 cmd  aa 06 08 00 02 00 設定packet length
+  // 1.2 resp aa 0e 06 xx 00 00 回應ok
+  // 2.1 cmd  aa 05 00 00 00 00 快照 壓縮圖像
+  // 2.2 resp aa 0e 05 xx 00 00 回應ok
+  // 3.1 cmd  aa 04 01 00 00 00 獲取圖像 快照圖像
+  // 3.2 resp aa 0e 04 xx 00 00 回應ok
+  // 3.3 resp aa 0a 01 ~~ ~~ ~~ 數據傳送請求 快照圖像，回應packet size
 void Capture()
 {
   char cmd[] = { 0xaa, 0x06 | cameraAddr, 0x08, PIC_PKT_LEN & 0xff, (PIC_PKT_LEN>>8) & 0xff ,0}; 
@@ -149,7 +173,9 @@ void Capture()
   while (1)
   {
     clearRxBuf();
+    // 1.1
     sendCmd(cmd, 6);
+    // 1.2
     if (readBytes((char *)resp, 6, 100) != 6) continue;
     if (resp[0] == 0xaa && resp[1] == (0x0e | cameraAddr) && resp[2] == 0x06 && resp[4] == 0 && resp[5] == 0) break; 
   }
@@ -161,7 +187,9 @@ void Capture()
   while (1)
   {
     clearRxBuf();
+    // 2.1
     sendCmd(cmd, 6);
+    // 2.2
     if (readBytes((char *)resp, 6, 100) != 6) continue;
     if (resp[0] == 0xaa && resp[1] == (0x0e | cameraAddr) && resp[2] == 0x05 && resp[4] == 0 && resp[5] == 0) break;
   }
@@ -170,10 +198,13 @@ void Capture()
   while (1) 
   {
     clearRxBuf();
+    // 3.1
     sendCmd(cmd, 6);
+    // 3.2
     if (readBytes((char *)resp, 6, 100) != 6) continue;
     if (resp[0] == 0xaa && resp[1] == (0x0e | cameraAddr) && resp[2] == 0x04 && resp[4] == 0 && resp[5] == 0)
     {
+      // 3.3
       if (readBytes((char *)resp, 6, 1000) != 6)
       {
         continue;
@@ -190,6 +221,27 @@ void Capture()
   
 }
 /*********************************************************************/
+  // 取得圖像數據
+  // 1. cmd  aa 0e 0i 00 00 00 回應相機數據傳送的請求
+  // 2. resp
+  // (1..looping..2)
+  // 3. cmd  aa 0e 00 00 F0 F0 結束
+/*
+size_t File::write(const uint8_t *buf, size_t size) {
+  size_t t;
+  if (!_file) {
+    setWriteError();
+    return 0;
+  }
+  _file->clearWriteError();
+  t = _file->write(buf, size);
+  if (_file->getWriteError()) {
+    setWriteError();
+    return 0;
+  }
+  return t;
+}
+*/
 void GetData()
 {
   unsigned int pktCnt = (picTotalLen) / (PIC_PKT_LEN - 6); 
@@ -221,9 +273,13 @@ void GetData()
     retry:
       delay(10);
       clearRxBuf(); 
+      // 1. 
       sendCmd(cmd, 6); 
+      // 2.
       uint16_t cnt = readBytes((char *)pkt, PIC_PKT_LEN, 200);
       
+      // 檢查封包是否完整
+      // 校验码:错误校验码,低字节等于该包数据除去校验码的累加和,高字节等于 0。校验码低字节=累加(字节(0)~字节(N-2);校验码高字节=0。
       unsigned char sum = 0; 
       for (int y = 0; y < cnt - 2; y++)
       {
@@ -235,11 +291,17 @@ void GetData()
         else break;
       }
       
+      // 寫檔，packet format如下:
+      // [0][1] packet id
+      // [2][3] 資料長度
+      // [4]~[N-6] 資料
+      // [N-2][N-1] 驗証碼
       myFile.write((const uint8_t *)&pkt[4], cnt-6); 
       //if (cnt != PIC_PKT_LEN) break;
     }
     cmd[4] = 0xf0;
     cmd[5] = 0xf0; 
+    // 3.
     sendCmd(cmd, 6); 
   }
   myFile.close();
