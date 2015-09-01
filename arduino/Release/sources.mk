@@ -1,0 +1,115 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+O_UPPER_SRCS := 
+O_SRCS := 
+EEP_SRCS := 
+C_UPPER_SRCS := 
+CPP_SRCS := 
+AR_SRCS := 
+ASM_SRCS := 
+CXX_SRCS := 
+C++_SRCS := 
+ELF_SRCS := 
+C_SRCS := 
+S_UPPER_SRCS := 
+CC_SRCS := 
+C_DEPS := 
+AR := 
+FLASH_IMAGE := 
+EEP := 
+CXX_DEPS := 
+S_UPPER_DEPS := 
+C++_DEPS := 
+ELF := 
+ASM_DEPS := 
+CC_DEPS := 
+AR_OBJ := 
+CPP_DEPS := 
+LINK_OBJ := 
+C_UPPER_DEPS := 
+SIZEDUMMY := 
+
+# Every subdirectory with source files must be described here
+SUBDIRS := \
+. \
+UltraSound-WebClient \
+arduino/core \
+arduino/java.libraries/Adafruit-VC0706-Serial-Camera-Library-master \
+arduino/java.libraries/Adafruit_CC3000_Library-master \
+arduino/java.libraries/Adafruit_CC3000_Library-master/utility \
+arduino/java.libraries/Bridge/src \
+arduino/java.libraries/Esplora/src \
+arduino/java.libraries/Ethernet/src \
+arduino/java.libraries/Ethernet/src/utility \
+arduino/java.libraries/Firmata \
+arduino/java.libraries/Firmata/utility \
+arduino/java.libraries/GSM/src \
+arduino/java.libraries/LiquidCrystal/src \
+arduino/java.libraries/RobotIRremote/src \
+arduino/java.libraries/Robot_Control/src \
+arduino/java.libraries/Robot_Control/src/utility \
+arduino/java.libraries/Robot_Motor/src \
+arduino/java.libraries/SD/src \
+arduino/java.libraries/SD/src/utility \
+arduino/java.libraries/Servo/src/avr \
+arduino/java.libraries/Servo/src/sam \
+arduino/java.libraries/SpacebrewYun/src \
+arduino/java.libraries/Stepper/src \
+arduino/java.libraries/TFT/src \
+arduino/java.libraries/TFT/src/utility \
+arduino/java.libraries/Temboo/src \
+arduino/java.libraries/Temboo/src/utility \
+arduino/java.libraries/WiFi/extras/binary \
+arduino/java.libraries/WiFi/extras/wifiHD/Release \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/BOARDS/ARDUINO \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/BOARDS/EVK1105 \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/COMPONENTS/MEMORY/DATA_FLASH/AT45DBX \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/EBI/SMC \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/EIC \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/FLASHC \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/GPIO \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/INTC \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/PDCA \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/PM \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/RTC \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/SPI \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/TC \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/DRIVERS/USART \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/SERVICES/DELAY \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/SERVICES/LWIP/lwip-1.3.2/src/core \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/SERVICES/LWIP/lwip-1.3.2/src/core/ipv4 \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/SERVICES/LWIP/lwip-1.3.2/src/netif \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/SERVICES/LWIP/lwip-port-1.3.2/HD/if/netif \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/SERVICES/MEMORY/CTRL_ACCESS \
+arduino/java.libraries/WiFi/extras/wifiHD/src/SOFTWARE_FRAMEWORK/UTILS/DEBUG \
+arduino/java.libraries/WiFi/extras/wifiHD/src \
+arduino/java.libraries/WiFi/extras/wifi_dnld/Release \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/BOARDS/ARDUINO \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/BOARDS/EVK1105 \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/COMPONENTS/MEMORY/DATA_FLASH/AT45DBX \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/DRIVERS/FLASHC \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/DRIVERS/GPIO \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/DRIVERS/INTC \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/DRIVERS/PM \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/DRIVERS/SPI \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/DRIVERS/USART \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/SERVICES/MEMORY/CTRL_ACCESS \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src/SOFTWARE_FRAMEWORK/UTILS/DEBUG \
+arduino/java.libraries/WiFi/extras/wifi_dnld/src \
+arduino/java.libraries/WiFi/src \
+arduino/java.libraries/WiFi/src/utility \
+arduino/libraries/SPI \
+arduino/libraries/SoftwareSerial \
+arduino/libraries/Wire \
+arduino/libraries/Wire/utility \
+keypad \
+libraries/IRremote \
+libraries/Keypad \
+ov528_cc3000_pichannel \
+ov7670-no-ram-arduino-uno \
+ov7670_simple \
+wifi資料/wifi¸ê®Æ/CC3000\ WIFI¸ê®Æ/Adafruit_CC3000_Library-master/Adafruit_CC3000_Library-master \
+wifi資料/wifi¸ê®Æ/CC3000\ WIFI¸ê®Æ/Adafruit_CC3000_Library-master/Adafruit_CC3000_Library-master/utility \
+

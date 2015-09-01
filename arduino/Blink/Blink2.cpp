@@ -1,6 +1,8 @@
+#include <Arduino.h>
 //The setup function is called once at startup of the sketch
 void setup()
 {
+	pinMode(1,OUTPUT);
 // Add your initialization code here
 }
 
