@@ -7,7 +7,7 @@
 //  For more details about the product please check http://www.seeedstudio.com/depot/
 
 #include <arduino.h>
-#include <SD.h>
+//#include <SD.h>
 #include <SoftwareSerial.h>
 
 #define PIC_PKT_LEN    128        //data length of each read, dont set this too big because ram is limited
@@ -19,7 +19,7 @@
 
 #define PIC_FMT        PIC_FMT_VGA
 
-File myFile;
+//File myFile;
 SoftwareSerial softSerial(2, 3);  //rx,tx (11-13 is used by sd shield)
 
 const byte cameraAddr = (CAM_ADDR << 5);  // addr
@@ -36,10 +36,10 @@ void setup()
   //Serial.println("Initializing SD card....");
   pinMode(4,OUTPUT);          // CS pin of SD Card Shield
   
-  if (!SD.begin(4)) {
-    //Serial.print("sd init failed");
-    return;
-  }
+//  if (!SD.begin(4)) {
+//    //Serial.print("sd init failed");
+//    //return;
+//  }
   //Serial.println("sd init done.");
   initialize();
 }
@@ -135,7 +135,7 @@ void initialize()
   cmd[2] = 0x0d;
   // 4.cmd
   sendCmd(cmd, 6); 
-  //Serial.println("\nCamera initialization done.");
+  Serial.println("\nCamera initialization done.");
 }
 /*********************************************************************/
   // 拍照前初始化
@@ -254,16 +254,16 @@ void GetData()
   picName[3] = picNameNum/10 + '0';
   picName[4] = picNameNum%10 + '0';
   
-  if (SD.exists(picName))
-  {
-    SD.remove(picName);
-  }
+//  if (SD.exists(picName))
+//  {
+//    SD.remove(picName);
+//  }
   
-  myFile = SD.open(picName, FILE_WRITE); 
-  if(!myFile){
-    //Serial.println("myFile open fail...");
-  }
-  else{
+//  myFile = SD.open(picName, FILE_WRITE); 
+//  if(!myFile){
+//    //Serial.println("myFile open fail...");
+//  }
+//  else{
     for (unsigned int i = 0; i < pktCnt; i++)
     {
       cmd[4] = i & 0xff;
@@ -296,15 +296,15 @@ void GetData()
       // [2][3] 資料長度
       // [4]~[N-6] 資料
       // [N-2][N-1] 驗証碼
-      myFile.write((const uint8_t *)&pkt[4], cnt-6); 
+//      myFile.write((const uint8_t *)&pkt[4], cnt-6); 
       //if (cnt != PIC_PKT_LEN) break;
     }
     cmd[4] = 0xf0;
     cmd[5] = 0xf0; 
     // 3.
     sendCmd(cmd, 6); 
-  }
-  myFile.close();
+//  }
+//  myFile.close();
   picNameNum ++;
 }
 

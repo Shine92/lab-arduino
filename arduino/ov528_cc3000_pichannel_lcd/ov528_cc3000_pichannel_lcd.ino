@@ -15,6 +15,8 @@
 #include <SPI.h>
 #include <string.h>
 #include "utility/debug.h"
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
 
 
 #define PIC_PKT_LEN    64        //data length of each read, dont set this too big because ram is limited
@@ -24,7 +26,7 @@
 #define CAM_ADDR       0
 #define CAM_SERIAL     softSerial
 
-#define PIC_FMT        PIC_FMT_CIF
+#define PIC_FMT        PIC_FMT_VGA
 
 // Define CC3000 chip pins
 // These are the interrupt and control pins
@@ -39,12 +41,9 @@ Adafruit_CC3000 cc3000 = Adafruit_CC3000(ADAFRUIT_CC3000_CS, ADAFRUIT_CC3000_IRQ
 
 // #define WLAN_SSID       "III-Classroom-2001"//"Family Mart"//"stevephone"//"Family Mart"//"henry's zf2"//"III-Classroom-2001"//"henry's zf2"           // cannot be longer than 32 characters!
 // #define WLAN_PASS       "1234567890"//"danny7666"//"lpsin0811"//"03241111"//"1234567890"//"03241111"
-#define WLAN_SSID       "henry's zf2"
-//#define WLAN_SSID       "RB-1802G3"
+//#define WLAN_SSID       "henry's zf2"
+#define WLAN_SSID       "RB-1802G3"
 #define WLAN_PASS       "03241111"
-//#define WLAN_SSID       "Xperia Z1_291e"
-//#define WLAN_PASS       "9012345678"
-
 
 // Security can be WLAN_SEC_UNSEC, WLAN_SEC_WEP, WLAN_SEC_WPA or WLAN_SEC_WPA2
 #define WLAN_SECURITY   WLAN_SEC_WPA2
@@ -56,11 +55,13 @@ Adafruit_CC3000 cc3000 = Adafruit_CC3000(ADAFRUIT_CC3000_CS, ADAFRUIT_CC3000_IRQ
 // What page to grab!
 // #define WEBSITE      "10.2.24.116"//"172.20.10.8"//"192.168.43.50"//"172.20.10.3"//"10.2.24.113"//"192.168.43.90"//"stark-everglades-8527.herokuapp.com"////"www.adafruit.com"
 //#define WEBSITE      "192.168.1.16"
-#define WEBSITE      "ec2-52-26-138-212.us-west-2.compute.amazonaws.com"
+#define WEBSITE "ec2-52-26-138-212.us-west-2.compute.amazonaws.com"
 #define WEBPAGE      "/dispatcher.php"//"/camera.php"//"/login/data.php"//"lab3_bumpweb/bumpmemo.php?bumplength=2.567"//"/test/Tail-Log-Receive-Data.php"//"/testwifi/index.html"
 
 uint32_t ip;
 Adafruit_CC3000_Client client;
+
+LiquidCrystal_I2C lcd(0x27,16,2);
 
 
 // File myFile;
@@ -98,7 +99,9 @@ void setup()
   
   initialize_cc3000();
   initialize();
-
+  lcd.init();
+  lcd.backlight();
+  lcd.print("Arduino");
   //preCapture();
   //Capture();
   //Serial.print("Saving picture...");
@@ -621,14 +624,14 @@ void sendData()
   Serial.println(F("-------------------------------------"));
   
   /* Read data until either the connection is closed, or the idle timeout is reached. */ 
-//  unsigned long lastRead = millis();
-//  while (client.connected() && (millis() - lastRead < IDLE_TIMEOUT_MS)) {
-//    while (client.available()) {
-//      char c = client.read();
-//      Serial.print(c);
-//      lastRead = millis();
-//    }
-//  }
+  unsigned long lastRead = millis();
+  while (client.connected() && (millis() - lastRead < IDLE_TIMEOUT_MS)) {
+    while (client.available()) {
+      char c = client.read();
+      //Serial.print(c);
+      lastRead = millis();
+    }
+  }
   client.close();
   Serial.println(F("-------------------------------------"));
 
