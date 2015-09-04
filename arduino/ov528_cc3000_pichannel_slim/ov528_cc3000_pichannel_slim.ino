@@ -39,11 +39,12 @@ Adafruit_CC3000 cc3000 = Adafruit_CC3000(ADAFRUIT_CC3000_CS, ADAFRUIT_CC3000_IRQ
 
 // #define WLAN_SSID       "III-Classroom-2001"//"Family Mart"//"stevephone"//"Family Mart"//"henry's zf2"//"III-Classroom-2001"//"henry's zf2"           // cannot be longer than 32 characters!
 // #define WLAN_PASS       "1234567890"//"danny7666"//"lpsin0811"//"03241111"//"1234567890"//"03241111"
-#define WLAN_SSID       "henry's zf2"
+//#define WLAN_SSID       "henry's zf2"
 //#define WLAN_SSID       "RB-1802G3"
-#define WLAN_PASS       "03241111"
-//#define WLAN_SSID       "Xperia Z1_291e"
-//#define WLAN_PASS       "9012345678"
+//#define WLAN_SSID       "g32"
+//#define WLAN_PASS       "03241111"
+#define WLAN_SSID       "Xperia Z1_291e"
+#define WLAN_PASS       "9012345678"
 
 
 // Security can be WLAN_SEC_UNSEC, WLAN_SEC_WEP, WLAN_SEC_WPA or WLAN_SEC_WPA2
@@ -80,7 +81,7 @@ boolean val = false;               //motion val, 0: no    1: yes
 /*********************************************************************/
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(9600);
   CAM_SERIAL.begin(9600);       //cant be faster than 9600, maybe difference with diff board.
   pinMode(buttonPin, INPUT);    // initialize the pushbutton pin as an input
   //Serial.println("Initializing SD card....");
@@ -578,6 +579,7 @@ void sendData()
       
       int retry_cnt = 0;
     retry:
+      Serial.print(".");
       delay(10);
       clearRxBuf(); 
       // 1. 
